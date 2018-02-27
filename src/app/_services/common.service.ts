@@ -10,7 +10,7 @@ export class CommonService {
   constructor(private http: HttpClient) { }
 
   getData(): Observable<any> {
-    return this.http.get<any>(this.url + "api/crime/");
+    return this.http.get<any>(this.url + "api/crime");
   }
 
 }
