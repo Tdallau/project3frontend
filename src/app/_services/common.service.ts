@@ -5,41 +5,18 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CommonService {
 
-  url = 'http://localhost:5000/';
-
   constructor(private http: HttpClient) { }
 
-  getCrime(crime_end_type = 'Geregistreerde misdrijven') {
-    return this.http.post(this.url + 'api/crime', { 'crime_end_type' : crime_end_type})
-      .map(result => result);
+  public getCrime() {
+    return this.http.post('http://localhost:5000/api/crime', {});
   }
 
-  getWork(wvtName = 'Banen') {
-    return this.http.post(this.url + 'api/work', { 'wvtName' : wvtName})
-      .map(result => result);
+  public getWork() {
+    return this.http.post('http://localhost:5000/api/work', {});
   }
 
-  getEducation(gender = 'Totaal mannen en vrouwen') {
-    return this.http.post(this.url + 'api/education', { 'gender' : gender})
-      .map(result => result);
+  public getEducation() {
+    return this.http.post('http://localhost:5000/api/education', {});
   }
-
-  merge_array(array1, array2) {
-    const result_array = [];
-    const arr = array1.concat(array2);
-    let len = arr.length;
-    const assoc = {};
-
-    while (len--) {
-      const item = arr[len];
-
-        if (!assoc[item]) {
-            result_array.unshift(item);
-            assoc[item] = true;
-        }
-    }
-
-    return result_array;
-}
 
 }
