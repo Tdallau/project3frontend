@@ -1,0 +1,45 @@
+a{
+    text-decoration: none;
+    color: black;
+    display: block;
+    height: 90vh;
+}
+#q1,#q2{
+    height: 90vh;
+}
+#q1{
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background: white;
+}
+#q1:hover{
+    text-shadow: 2px 2px #7c7c7c;
+    background: lightskyblue;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+
+}
+#q2{
+    background: white;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+#q2:hover{
+    background: lightskyblue;
+    text-shadow: 2px 2px #7c7c7c;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+
+}
