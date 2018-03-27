@@ -17,12 +17,16 @@ export class CommonService {
     return this.http.post('http://localhost:5000/api/work', {});
   }
 
-  public getEducation() {
-    return this.http.post('http://localhost:5000/api/education', {});
+  public getEducation(gender, eduTypeName) {
+    return this.http.post('http://localhost:5000/api/education', { gender : gender, eduTypeName : eduTypeName});
   }
 
   public getCrimeType() {
     return this.http.get('http://localhost:5000/api/crime-types');
+  }
+
+  public getEducationType() {
+    return this.http.get('http://localhost:5000/api/education-types');
   }
 
 }

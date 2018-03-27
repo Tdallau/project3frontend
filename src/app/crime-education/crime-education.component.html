@@ -1,16 +1,14 @@
 <div class="row">
 	<div class="col">
 		<div style="margin-left:10px;margin-top:10px;">
-			<!-- <button class="btn btn-primary" (click)="CrimeFilter();crime_end_type='Opgehelderde misdrijven'">Opgehelderde misdrijven</button><br/><br/>
-			<button class="btn btn-primary" (click)="CrimeFilter();crime_end_type='Registraties van verdachten'">Registraties van verdachten</button><br /><br/>
-			<button class="btn btn-primary" (click)="CrimeFilter();crime_end_type='Geregistreerde misdrijven'">Geregistreerde misdrijven</button> -->
+			<h1>Crime</h1>
 			<div class="dropdown">
 				<button class="btn btn-primary dropdown-toggle" type="button" id="ctdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 				 aria-expanded="false">
 					crime type
 				</button>
 				<div class="dropdown-menu" aria-labelledby="ctdropdownMenuButton">
-					<a class="dropdown-item" *ngFor="let ct of crime_types" (click)="CrimeFilter(crime_end_type,ct.name)">{{ct.name}}</a>
+					<a class="dropdown-item" *ngFor="let ct of crime_types" (click)="crimeFilter(crime_end_type,ct.name)">{{ct.name}}</a>
 
 				</div>
 			</div>
@@ -20,9 +18,32 @@
 					crime end type
 				</button>
 				<div class="dropdown-menu" aria-labelledby="cetdropdownMenuButton">
-					<a class="dropdown-item"  (click)="CrimeFilter('Geregistreerde misdrijven',crime_type)">Geregistreerde misdrijven</a>
-					<a class="dropdown-item"  (click)="CrimeFilter('Opgehelderde misdrijven',crime_type)">Opgehelderde misdrijven</a>
-					<a class="dropdown-item"  (click)="CrimeFilter('Registraties van verdachten',crime_type)">Registraties van verdachten</a>
+					<a class="dropdown-item"  (click)="crimeFilter('Geregistreerde misdrijven',crime_type)">Geregistreerde misdrijven</a>
+					<a class="dropdown-item"  (click)="crimeFilter('Opgehelderde misdrijven',crime_type)">Opgehelderde misdrijven</a>
+					<a class="dropdown-item"  (click)="crimeFilter('Registraties van verdachten',crime_type)">Registraties van verdachten</a>
+				</div>
+			</div>
+
+			<h1>Education</h1>
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" id="ctdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+				 aria-expanded="false">
+					education type
+				</button>
+				<div class="dropdown-menu" aria-labelledby="ctdropdownMenuButton">
+					<a class="dropdown-item" *ngFor="let et of education_types" (click)="educationFilter(gender,et.name)">{{et.name}}</a>
+
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" id="cetdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+				 aria-expanded="false">
+					gender
+				</button>
+				<div class="dropdown-menu" aria-labelledby="cetdropdownMenuButton">
+					<a class="dropdown-item"  (click)="educationFilter('Totaal mannen en vrouwen',education_type)">Totaal mannen en vrouwen</a>
+					<a class="dropdown-item"  (click)="educationFilter('Mannen',education_type)">Mannen</a>
+					<a class="dropdown-item"  (click)="educationFilter('Vrouwen',education_type)">Vrouwen</a>
 				</div>
 			</div>
 

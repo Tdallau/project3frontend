@@ -74,7 +74,7 @@ export class WorkEducationComponent implements OnInit {
             }
           });
         });
-        this.mainService.getEducation().subscribe((data: [any]) => {
+        this.mainService.getEducation('Totaal mannen en vrouwen', 'Totaal').subscribe((data: [any]) => {
           data.forEach(el => {
             // console.log(element);
             this.data.forEach(e => {

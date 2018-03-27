@@ -24,7 +24,10 @@ export class CrimeEducationComponent implements OnInit {
   private show = false;
   private crime_end_type: string;
   private crime_type: string;
+  private gender: string;
+  private education_type: string;
   private crime_types = [];
+  private education_types = [];
 
 
   private labels = [];
@@ -58,6 +61,10 @@ export class CrimeEducationComponent implements OnInit {
       this.crime_types = data;
       console.log(this.crime_types);
     });
+    this.mainService.getEducationType().subscribe((data: [any]) => {
+      this.education_types = data;
+      console.log(this.education_types);
+    });
   }
 
   initData() {
@@ -82,7 +89,7 @@ export class CrimeEducationComponent implements OnInit {
             }
           });
         });
-        this.mainService.getEducation().subscribe((data: [any]) => {
+        this.mainService.getEducation('Totaal mannen en vrouwen', 'Totaal').subscribe((data: [any]) => {
           data.forEach(el => {
             // console.log(element);
             this.data.forEach(e => {
@@ -154,9 +161,11 @@ export class CrimeEducationComponent implements OnInit {
     }];
   }
 
-  CrimeFilter(crime_end_type = 'Geregistreerde misdrijven', crime_type = 'totaal'): void {
+  crimeFilter(crime_end_type = 'Geregistreerde misdrijven', crime_type = 'totaal'): void {
     // const cet = crime_end_type !== undefined ? this.crime_end_type : 'Geregistreerde misdrijven';
     // const ct = crime_type !== undefined ? this.crime_type : 'totaal';
+    this.crime_end_type = crime_end_type;
+    this.crime_type = crime_type;
     console.log(crime_end_type);
     console.log(crime_type);
     this.mainService.getCrime(crime_end_type, crime_type).subscribe((crime: [any]) => {
@@ -174,6 +183,33 @@ export class CrimeEducationComponent implements OnInit {
         label: 'vergelijking',
         data: this.data.map(res => ({x : res.education_amount, y : res.crime_amount}))
       }];
+    });
+  }
+
+  educationFilter(gender = 'Totaal mannen en vrouwen', eduTypeName = 'Totaal'): void {
+    // const cet = crime_end_type !== undefined ? this.crime_end_type : 'Geregistreerde misdrijven';
+    // const ct = crime_type !== undefined ? this.crime_type : 'totaal';
+    this.gender = gender;
+    this.education_type = eduTypeName;
+    console.log(gender);
+    console.log(eduTypeName);
+    this.mainService.getEducation(gender, eduTypeName).subscribe((education: [any]) => {
+      console.log(education);
+      education.forEach(el => {
+
+        this.data.forEach(e => {
+          if (e.year === el.year) {
+            console.log(el.amount);
+            e.education_amount = el.amount;
+          }
+        });
+      });
+      // console.log(this.data);
+      this.datasets = [{
+        label: 'vergelijking',
+        data: this.data.map(res => ({x : res.education_amount, y : res.crime_amount}))
+      }];
+      this.chart.chart.config.data.labels = this.data.map(res => res.education_amount);
     });
   }
 
