@@ -22,6 +22,8 @@ export class CrimeEducationComponent implements OnInit {
   private datasets = [];
   private data = [];
   private show = false;
+  private crime_end_type: string;
+  private crime_type: string;
 
   private labels = [];
 
@@ -144,6 +146,25 @@ export class CrimeEducationComponent implements OnInit {
       label: '# of Votes',
       data: newData
     }];
+  }
+
+  CrimeFilter() {
+    this.mainService.getCrime(this.crime_end_type, this.crime_type).subscribe((data: [any]) => {
+      console.log(this.crime_end_type);
+      // console.log(data);
+      data.forEach(el => {
+        this.data.forEach(e => {
+          if (e.year === el.year) {
+            e.crime_amount = el.amount;
+          }
+        });
+      });
+      // console.log(this.data);
+      this.datasets = [{
+        label: 'vergelijking',
+        data: this.data.map(res => ({x : res.education_amount, y : res.crime_amount}))
+      }];
+    });
   }
 
 }

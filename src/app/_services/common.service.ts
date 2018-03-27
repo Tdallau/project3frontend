@@ -7,8 +7,8 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  public getCrime() {
-    return this.http.post('http://localhost:5000/api/crime', {});
+  public getCrime(crime_end_type = 'Geregistreerde misdrijven', crime_type = '') {
+    return this.http.post('http://localhost:5000/api/crime', {crime_end_type : crime_end_type, crime_type : crime_type});
   }
 
   public getWork() {
