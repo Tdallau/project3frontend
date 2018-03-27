@@ -1,0 +1,13 @@
+.custom-margin {
+    margin-left: -7px !important;
+}
+
+.margin-top {
+    margin-top: 20px; 
+    margin-left: 20px;
+}
+
+.custom-dropdown {
+    height : 200px;
+    overflow : auto;
+}

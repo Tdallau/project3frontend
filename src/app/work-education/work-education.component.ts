@@ -22,6 +22,9 @@ export class WorkEducationComponent implements OnInit {
   private datasets = [];
   private data = [];
   private show = false;
+  private gender = 'Totaal mannen en vrouwen';
+  private education_type = 'Totaal';
+  private education_types = [];
 
   private labels = [];
 
@@ -50,6 +53,10 @@ export class WorkEducationComponent implements OnInit {
 
   ngOnInit() {
     console.log('running');
+    this.mainService.getEducationType().subscribe((data: [any]) => {
+      this.education_types = data;
+      console.log(this.education_types);
+    });
   }
 
   initData() {
@@ -144,6 +151,32 @@ export class WorkEducationComponent implements OnInit {
       label: '# of Votes',
       data: newData
     }];
+  }
+  educationFilter(gender = 'Totaal mannen en vrouwen', eduTypeName = 'Totaal'): void {
+    // const cet = crime_end_type !== undefined ? this.crime_end_type : 'Geregistreerde misdrijven';
+    // const ct = crime_type !== undefined ? this.crime_type : 'totaal';
+    this.gender = gender;
+    this.education_type = eduTypeName;
+    console.log(gender);
+    console.log(eduTypeName);
+    this.mainService.getEducation(gender, eduTypeName).subscribe((education: [any]) => {
+      console.log(education);
+      education.forEach(el => {
+
+        this.data.forEach(e => {
+          if (e.year === el.year) {
+            console.log(el.amount);
+            e.education_amount = el.amount;
+          }
+        });
+      });
+      // console.log(this.data);
+      this.datasets = [{
+        label: 'vergelijking',
+        data: this.data.map(res => ({x : res.education_amount, y : res.work_amount}))
+      }];
+      this.chart.chart.config.data.labels = this.data.map(res => res.education_amount);
+    });
   }
 
 }

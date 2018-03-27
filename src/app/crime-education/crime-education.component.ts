@@ -22,10 +22,10 @@ export class CrimeEducationComponent implements OnInit {
   private datasets = [];
   private data = [];
   private show = false;
-  private crime_end_type: string;
-  private crime_type: string;
-  private gender: string;
-  private education_type: string;
+  private crime_end_type = 'Geregistreerde misdrijven';
+  private crime_type = 'totaal';
+  private gender = 'Totaal mannen en vrouwen';
+  private education_type = 'Totaal';
   private crime_types = [];
   private education_types = [];
 

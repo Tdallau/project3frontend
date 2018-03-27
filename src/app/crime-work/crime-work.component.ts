@@ -22,6 +22,9 @@ export class CrimeWorkComponent implements OnInit {
   private datasets = [];
   private data = [];
   private show = false;
+  private crime_end_type = 'Geregistreerde misdrijven';
+  private crime_type = 'totaal';
+  private crime_types = [];
 
   private labels = [];
 
@@ -50,6 +53,10 @@ export class CrimeWorkComponent implements OnInit {
 
   ngOnInit() {
     console.log('running');
+    this.mainService.getCrimeType().subscribe((data: [any]) => {
+      this.crime_types = data;
+      console.log(this.crime_types);
+    });
   }
 
   initData() {
@@ -144,6 +151,31 @@ export class CrimeWorkComponent implements OnInit {
       label: '# of Votes',
       data: newData
     }];
+  }
+
+  crimeFilter(crime_end_type = 'Geregistreerde misdrijven', crime_type = 'totaal'): void {
+    // const cet = crime_end_type !== undefined ? this.crime_end_type : 'Geregistreerde misdrijven';
+    // const ct = crime_type !== undefined ? this.crime_type : 'totaal';
+    this.crime_end_type = crime_end_type;
+    this.crime_type = crime_type;
+    console.log(crime_end_type);
+    console.log(crime_type);
+    this.mainService.getCrime(crime_end_type, crime_type).subscribe((crime: [any]) => {
+      console.log(crime);
+      crime.forEach(el => {
+
+        this.data.forEach(e => {
+          if (e.year === el.year) {
+            e.crime_amount = el.amount;
+          }
+        });
+      });
+      // console.log(this.data);
+      this.datasets = [{
+        label: 'vergelijking',
+        data: this.data.map(res => ({x : res.work_amount, y : res.crime_amount}))
+      }];
+    });
   }
 
 }
