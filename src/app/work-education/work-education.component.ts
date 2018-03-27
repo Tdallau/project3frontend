@@ -53,7 +53,7 @@ export class WorkEducationComponent implements OnInit {
   }
 
   initData() {
-    this.mainService.getCrime().subscribe((crime: [any]) => {
+    this.mainService.getCrime('Geregistreerde misdrijven', 'totaal').subscribe((crime: [any]) => {
       console.log(crime);
       crime.forEach(e => {
         this.data.push({

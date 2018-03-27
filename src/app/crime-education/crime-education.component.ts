@@ -22,6 +22,9 @@ export class CrimeEducationComponent implements OnInit {
   private datasets = [];
   private data = [];
   private show = false;
+  private crime_end_type: string;
+  private crime_type: string;
+  private crime_types = [];
 
   private labels = [];
 
@@ -50,10 +53,14 @@ export class CrimeEducationComponent implements OnInit {
 
   ngOnInit() {
     console.log('running');
+    this.mainService.getCrimeType().subscribe((data: [any]) => {
+      this.crime_types = data;
+      console.log(this.crime_types);
+    });
   }
 
   initData() {
-    this.mainService.getCrime().subscribe((crime: [any]) => {
+    this.mainService.getCrime('Geregistreerde misdrijven', 'totaal').subscribe((crime: [any]) => {
       console.log(crime);
       crime.forEach(e => {
         this.data.push({
@@ -144,6 +151,29 @@ export class CrimeEducationComponent implements OnInit {
       label: '# of Votes',
       data: newData
     }];
+  }
+
+  CrimeFilter(crime_end_type = 'Geregistreerde misdrijven', crime_type = 'totaal'): void {
+    // const cet = crime_end_type !== undefined ? this.crime_end_type : 'Geregistreerde misdrijven';
+    // const ct = crime_type !== undefined ? this.crime_type : 'totaal';
+    console.log(crime_end_type);
+    console.log(crime_type);
+    this.mainService.getCrime(crime_end_type, crime_type).subscribe((crime: [any]) => {
+ 
+      console.log(crime);
+      crime.forEach(el => {
+        this.data.forEach(e => {
+          if (e.year === el.year) {
+            e.crime_amount = el.amount;
+          }
+        });
+      });
+      // console.log(this.data);
+      this.datasets = [{
+        label: 'vergelijking',
+        data: this.data.map(res => ({x : res.education_amount, y : res.crime_amount}))
+      }];
+    });
   }
 
 }
