@@ -24,10 +24,8 @@ export class CrimeEducationComponent implements OnInit {
   private show = false;
   private crime_end_type: string;
   private crime_type: string;
-<<<<<<< HEAD
   private crime_types = [];
-=======
->>>>>>> 8b6b429f8f1c7ca42dcb46f81808ab771b1f2b27
+
 
   private labels = [];
 
