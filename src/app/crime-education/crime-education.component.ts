@@ -159,7 +159,6 @@ export class CrimeEducationComponent implements OnInit {
     console.log(crime_end_type);
     console.log(crime_type);
     this.mainService.getCrime(crime_end_type, crime_type).subscribe((crime: [any]) => {
- 
       console.log(crime);
       crime.forEach(el => {
         this.data.forEach(e => {
