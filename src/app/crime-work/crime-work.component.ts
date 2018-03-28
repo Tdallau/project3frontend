@@ -26,6 +26,11 @@ export class CrimeWorkComponent implements OnInit {
   private crime_type = 'totaal';
   private crime_types = [];
 
+  private work_value_type = 'Banen';
+  private branch_type = 'A-U Alle economische activiteiten';
+  private worker_type = 'Totaal';
+  private work_value_types = []
+
   private labels = [];
 
   private options = {
@@ -57,6 +62,10 @@ export class CrimeWorkComponent implements OnInit {
       this.crime_types = data;
       console.log(this.crime_types);
     });
+    this.mainService.getWorkValueType().subscribe((data: [any]) => {
+      this.work_value_types = data;
+      console.log(this.work_value_types);
+    });
   }
 
   initData() {
@@ -70,13 +79,13 @@ export class CrimeWorkComponent implements OnInit {
           work_amount : 0
         });
       });
-      this.mainService.getWork().subscribe((work: [any]) => {
+      this.mainService.getWork('Banen', 'Totaal', 'A-U Alle economische activiteiten').subscribe((work: [any]) => {
         console.log(work);
         work.forEach(el => {
           // console.log(element);
           this.data.forEach(e => {
             if (e.year === el.year) {
-              e.work_amount = +el.amount;
+              e.work_amount = el.amount;
               // console.log(e);
             }
           });
@@ -178,4 +187,33 @@ export class CrimeWorkComponent implements OnInit {
     });
   }
 
+
+  workFilter(wvtName = 'Banen', typeName = 'Totaal', branch = 'A-U Alle economische activiteiten'): void {
+
+    this.work_value_type = wvtName;
+    this.worker_type = typeName;
+    this.branch_type = branch;
+
+    console.log(wvtName);
+    console.log(typeName);
+    console.log(branch);
+    this.mainService.getWork(wvtName, typeName, branch).subscribe((work: [any]) => {
+      console.log(work);
+      work.forEach(el => {
+
+        this.data.forEach(e => {
+          if (e.year === el.year) {
+            console.log(el.amount);
+            e.work_amount = el.amount;
+          }
+        });
+      });
+      // console.log(this.data);
+      this.datasets = [{
+        label: 'vergelijking',
+        data: this.data.map(res => ({ x: res.work_amount, y: res.crime_amount }))
+      }];
+      this.chart.chart.config.data.labels = this.data.map(res => res.work_amount);
+    });
+  }
 }
