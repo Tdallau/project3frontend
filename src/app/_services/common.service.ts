@@ -9,7 +9,7 @@ export class CommonService {
 
 
   public getCrime(crime_end_type, crime_type) {
-    return this.http.post('http://localhost:5000/api/crime', {crime_end_type : crime_end_type, crime_type_name : crime_type});
+    return this.http.post('http://localhost:5000/api/crime', {crime_end_type : crime_end_type, crime_type : crime_type});
 
   }
 

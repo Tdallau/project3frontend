@@ -58,7 +58,7 @@
 				</li>
 				<li class="nav-item">
 					<div class="dropdown">
-						<button class="btn dropdown-toggle" type="button" id="ctdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button class="btn btn-custom dropdown-toggle" type="button" id="ctdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							{{crime_type}}
 						</button>
 						<div class="dropdown-menu custom-dropdown" aria-labelledby="ctdropdownMenuButton">
@@ -69,12 +69,12 @@
 				</li>
 				<li class="nav-item">
 					<div class="dropdown">
-						<button class="btn dropdown-toggle" type="button" id="cetdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+						<button class="btn btn-custom dropdown-toggle" type="button" id="cetdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
 						 aria-expanded="false">
 							{{crime_end_type}}
 						</button>
 						<div class="dropdown-menu custom-dropdown" aria-labelledby="cetdropdownMenuButton">
-							<a class="dropdown-item" (click)="crimeFilter('Geregistreerde misdrijven',crime_type)">Geregistreerde misdrijven</a>
+							<a class="dropdown-item " (click)="crimeFilter('Geregistreerde misdrijven',crime_type)">Geregistreerde misdrijven</a>
 							<a class="dropdown-item" (click)="crimeFilter('Opgehelderde misdrijven',crime_type)">Opgehelderde misdrijven</a>
 							<a class="dropdown-item" (click)="crimeFilter('Registraties van verdachten',crime_type)">Registraties van verdachten</a>
 						</div>

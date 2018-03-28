@@ -11,3 +11,7 @@
     height : 200px;
     overflow : auto;
 }
+
+.btn-custom {
+    background-color: #fff !important;
+}
