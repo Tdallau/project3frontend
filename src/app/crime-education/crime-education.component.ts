@@ -62,21 +62,12 @@ export class CrimeEducationComponent implements OnInit {
         }
       }],
       xAxes: [{
-<<<<<<< HEAD
-        scaleLabel: {
-          display: true,
-          labelString: 'Opleiding ->',
-          fontSize: 20
-        }
-      }],
-=======
           scaleLabel: {
             display: true,
             labelString: 'Opleiding ->',
             fontSize: 20
           }
       }]
->>>>>>> f13304588850404210cbe58715a2cf1dc652f0ab
     }
   };
 
