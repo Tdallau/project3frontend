@@ -38,7 +38,7 @@ export class WorkEducationComponent implements OnInit {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Work ->',
+          labelString: 'Werk ->',
           fontSize: 20
         },
         ticks: {
@@ -49,7 +49,7 @@ export class WorkEducationComponent implements OnInit {
       xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Education ->',
+            labelString: 'Opleiding ->',
             fontSize: 20
           }
       }]

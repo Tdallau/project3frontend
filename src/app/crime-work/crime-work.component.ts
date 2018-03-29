@@ -29,7 +29,7 @@ export class CrimeWorkComponent implements OnInit {
   private work_value_type = 'Banen';
   private branch_type = 'A-U Alle economische activiteiten';
   private worker_type = 'Totaal';
-  private work_value_types = []
+  private work_value_types = [];
 
   private labels = [];
 
@@ -38,7 +38,7 @@ export class CrimeWorkComponent implements OnInit {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Crime ->',
+          labelString: 'Criminaliteit ->',
           fontSize: 20
         },
         ticks: {
@@ -49,7 +49,7 @@ export class CrimeWorkComponent implements OnInit {
       xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Work ->',
+            labelString: 'Werk ->',
             fontSize: 20
           }
       }]

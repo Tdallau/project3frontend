@@ -37,7 +37,7 @@ export class CrimeEducationComponent implements OnInit {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Crime ->',
+          labelString: 'Criminaliteit ->',
           fontSize: 20
         },
         ticks: {
@@ -48,7 +48,7 @@ export class CrimeEducationComponent implements OnInit {
       xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Education ->',
+            labelString: 'Opleiding ->',
             fontSize: 20
           }
       }]
