@@ -29,16 +29,32 @@ export class CrimeWorkComponent implements OnInit {
   private work_value_type = 'Banen';
   private branch_type = 'A-U Alle economische activiteiten';
   private worker_type = 'Totaal';
-  private work_value_types = []
+  private work_value_types = [];
 
   private labels = [];
 
   private options = {
+    tooltips: {
+      callbacks: {
+        title: function (tooltipItem, data) {
+          const title = [data.datasets[0].data[tooltipItem[0].index].label];
+          return title;
+        },
+        label: function (tooltipItem, data) {
+          const label = ['Werk: ' + tooltipItem.xLabel, 'Criminaliteit: ' + tooltipItem.yLabel];
+
+          return label;
+        }
+      }
+    },
+    legend: {
+      display: false
+    },
     scales: {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Crime ->',
+          labelString: 'Criminaliteit ->',
           fontSize: 20
         },
         ticks: {
@@ -49,7 +65,7 @@ export class CrimeWorkComponent implements OnInit {
       xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Work ->',
+            labelString: 'Werk ->',
             fontSize: 20
           }
       }]
@@ -104,7 +120,7 @@ export class CrimeWorkComponent implements OnInit {
           console.log(this.data.map(res => ({x : res.education_amount, y : res.crime_amount})));
           this.datasets = [{
             label: 'vergelijking',
-            data: this.data.map(res => ({x : res.work_amount, y : res.crime_amount}))
+            data: this.data.map(res => ({x : res.work_amount, y : res.crime_amount, label: res.year}))
           }];
           this.labels = this.data.map(res => res.work_amount);
           this.show = true;
@@ -182,7 +198,7 @@ export class CrimeWorkComponent implements OnInit {
       // console.log(this.data);
       this.datasets = [{
         label: 'vergelijking',
-        data: this.data.map(res => ({x : res.work_amount, y : res.crime_amount}))
+        data: this.data.map(res => ({x : res.work_amount, y : res.crime_amount, label: res.year}))
       }];
     });
   }
@@ -211,7 +227,7 @@ export class CrimeWorkComponent implements OnInit {
       // console.log(this.data);
       this.datasets = [{
         label: 'vergelijking',
-        data: this.data.map(res => ({ x: res.work_amount, y: res.crime_amount }))
+        data: this.data.map(res => ({ x: res.work_amount, y: res.crime_amount, label: res.year }))
       }];
       this.chart.chart.config.data.labels = this.data.map(res => res.work_amount);
     });

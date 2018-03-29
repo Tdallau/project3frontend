@@ -34,11 +34,27 @@ export class WorkEducationComponent implements OnInit {
   private labels = [];
 
   private options = {
+    tooltips: {
+      callbacks: {
+        title: function (tooltipItem, data) {
+          const title = [data.datasets[0].data[tooltipItem[0].index].label];
+          return title;
+        },
+        label: function (tooltipItem, data) {
+          const label = ['Opleiding: ' + tooltipItem.xLabel, 'Werk: ' + tooltipItem.yLabel];
+
+          return label;
+        }
+      }
+    },
+    legend: {
+      display: false
+    },
     scales: {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Work ->',
+          labelString: 'Werk ->',
           fontSize: 20
         },
         ticks: {
@@ -49,7 +65,7 @@ export class WorkEducationComponent implements OnInit {
       xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Education ->',
+            labelString: 'Opleiding ->',
             fontSize: 20
           }
       }]
@@ -104,7 +120,7 @@ export class WorkEducationComponent implements OnInit {
           console.log(this.data.map(res => ({x : res.education_amount, y : res.crime_amount})));
           this.datasets = [{
             label: 'vergelijking',
-            data: this.data.map(res => ({x : res.education_amount, y : res.work_amount}))
+            data: this.data.map(res => ({x : res.education_amount, y : res.work_amount, label: res.year}))
           }];
           this.labels = this.data.map(res => res.education_amount);
           this.show = true;
@@ -182,7 +198,7 @@ export class WorkEducationComponent implements OnInit {
       // console.log(this.data);
       this.datasets = [{
         label: 'vergelijking',
-        data: this.data.map(res => ({x : res.education_amount, y : res.work_amount}))
+        data: this.data.map(res => ({x : res.education_amount, y : res.work_amount, label: res.year}))
       }];
       this.chart.chart.config.data.labels = this.data.map(res => res.education_amount);
     });
@@ -210,7 +226,7 @@ export class WorkEducationComponent implements OnInit {
       // console.log(this.data);
       this.datasets = [{
         label: 'vergelijking',
-        data: this.data.map(res => ({ x: res.education_amount, y: res.work_amount }))
+        data: this.data.map(res => ({ x: res.education_amount, y: res.work_amount, label: res.year }))
       }];
     });
   }

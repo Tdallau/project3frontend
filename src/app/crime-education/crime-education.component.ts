@@ -33,11 +33,27 @@ export class CrimeEducationComponent implements OnInit {
   private labels = [];
 
   private options = {
+    tooltips: {
+      callbacks: {
+        title: function (tooltipItem, data) {
+          const title = [data.datasets[0].data[tooltipItem[0].index].label];
+          return title;
+        },
+        label: function (tooltipItem, data) {
+          const label = ['Opleiding: ' + tooltipItem.xLabel, 'Criminaliteit: ' + tooltipItem.yLabel];
+
+          return label;
+        }
+      }
+    },
+    legend: {
+      display: false
+    },
     scales: {
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Crime ->',
+          labelString: 'Criminaliteit ->',
           fontSize: 20
         },
         ticks: {
@@ -46,12 +62,12 @@ export class CrimeEducationComponent implements OnInit {
         }
       }],
       xAxes: [{
-          scaleLabel: {
-            display: true,
-            labelString: 'Education ->',
-            fontSize: 20
-          }
-      }]
+        scaleLabel: {
+          display: true,
+          labelString: 'Opleiding ->',
+          fontSize: 20
+        }
+      }],
     }
   };
 
@@ -72,10 +88,10 @@ export class CrimeEducationComponent implements OnInit {
       console.log(crime);
       crime.forEach(e => {
         this.data.push({
-          year : e.year,
-          crime_amount : e.amount,
-          education_amount : 0,
-          work_amount : 0
+          year: e.year,
+          crime_amount: e.amount,
+          education_amount: 0,
+          work_amount: 0
         });
       });
       this.mainService.getWork('Banen', 'Totaal', 'A-U Alle economische activiteiten').subscribe((work: [any]) => {
@@ -100,10 +116,10 @@ export class CrimeEducationComponent implements OnInit {
             });
           });
           console.log(this.data);
-          console.log(this.data.map(res => ({x : res.education_amount, y : res.crime_amount})));
+          console.log(this.data.map(res => ({ x: res.education_amount, y: res.crime_amount })));
           this.datasets = [{
-            label: 'vergelijking',
-            data: this.data.map(res => ({x : res.education_amount, y : res.crime_amount}))
+            // label: 'vergelijking',
+            data: this.data.map(res => ({ x: res.education_amount, y: res.crime_amount, label: res.year }))
           }];
           this.labels = this.data.map(res => res.education_amount);
           this.show = true;
@@ -129,38 +145,6 @@ export class CrimeEducationComponent implements OnInit {
     // this.labels = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2018'];
   }
 
-  clickData_WrongAnimation() {
-    this.labels.shift();
-    this.chart.datasets[0].data.shift();
-
-    const random = Math.round((Math.random() * (20 - 0)) + 0);
-    this.chart.datasets[0].data.push(random);
-    this.labels.push('Caption');
-
-    // once new data is computed and datasets are updated, tell our baseChart the datasets changed
-    this.chart.ngOnChanges({
-      datasets: {
-        currentValue: this.chart.datasets,
-        previousValue: null,
-        firstChange: true,
-        isFirstChange: () => true
-      }
-    });
-  }
-
-  clickData_CorrectAnimation() {
-    const random = Math.round((Math.random() * (29 - 0)) + 0);
-
-    const newData = this.datasets[0].data.slice();
-    newData.shift();
-    newData.push(random);
-
-    this.datasets = [{
-      label: '# of Votes',
-      data: newData
-    }];
-  }
-
   crimeFilter(crime_end_type = 'Geregistreerde misdrijven', crime_type = 'totaal'): void {
     // const cet = crime_end_type !== undefined ? this.crime_end_type : 'Geregistreerde misdrijven';
     // const ct = crime_type !== undefined ? this.crime_type : 'totaal';
@@ -180,8 +164,8 @@ export class CrimeEducationComponent implements OnInit {
       });
       // console.log(this.data);
       this.datasets = [{
-        label: 'vergelijking',
-        data: this.data.map(res => ({x : res.education_amount, y : res.crime_amount}))
+        // label: 'vergelijking',
+        data: this.data.map(res => ({ x: res.education_amount, y: res.crime_amount, label: res.year }))
       }];
     });
   }
@@ -206,8 +190,8 @@ export class CrimeEducationComponent implements OnInit {
       });
       // console.log(this.data);
       this.datasets = [{
-        label: 'vergelijking',
-        data: this.data.map(res => ({x : res.education_amount, y : res.crime_amount}))
+        // label: 'vergelijking',
+        data: this.data.map(res => ({ x: res.education_amount, y: res.crime_amount, label: res.year }))
       }];
       this.chart.chart.config.data.labels = this.data.map(res => res.education_amount);
     });
