@@ -1,5 +1,5 @@
 <div class="row">
-		<!-- <div class="col">
+	<!-- <div class="col">
 			<div style="margin-left:10px;margin-top:10px;">
 				<h1>Crime</h1>
 				<div class="dropdown">
@@ -50,90 +50,103 @@
 	
 			</div>
 		</div> -->
-		<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar margin-top">
-	
-			<ul class="nav nav-pills flex-column">
-				<li class="nav-item">
-					<h4>Werk</h4>
-				</li>
-				<li class="nav-item">
-					<div class="dropdown">
-						<button class="btn dropdown-toggle" type="button" id="ctdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							{{crime_type}}
-						</button>
-						<div class="dropdown-menu custom-dropdown" aria-labelledby="ctdropdownMenuButton">
-							<a class="dropdown-item " *ngFor="let ct of crime_types" (click)="crimeFilter(crime_end_type,ct.name)">{{ct.name}}</a>
-	
-						</div>
+	<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar margin-top">
+
+		<ul class="nav nav-pills flex-column">
+			<li class="nav-item">
+				<h4>Werk</h4>
+			</li>
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle" type="button" id="wvtdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+					 aria-expanded="false">
+						{{work_value_type}}
+					</button>
+					<div class="dropdown-menu custom-dropdown" aria-labelledby="wvtdropdownMenuButton">
+						<a class="dropdown-item " *ngFor="let wvt of work_value_types" (click)="workFilter(wvt.name, worker_type, branch_type)">{{wvt.name}}</a>
 					</div>
-				</li>
-				<li class="nav-item">
-					<div class="dropdown">
-						<button class="btn dropdown-toggle" type="button" id="cetdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-						 aria-expanded="false">
-							{{crime_end_type}}
-						</button>
-						<div class="dropdown-menu custom-dropdown" aria-labelledby="cetdropdownMenuButton">
-							<a class="dropdown-item" (click)="crimeFilter('Geregistreerde misdrijven',crime_type)">Geregistreerde misdrijven</a>
-							<a class="dropdown-item" (click)="crimeFilter('Opgehelderde misdrijven',crime_type)">Opgehelderde misdrijven</a>
-							<a class="dropdown-item" (click)="crimeFilter('Registraties van verdachten',crime_type)">Registraties van verdachten</a>
-						</div>
+				</div>
+			</li>
+
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle" type="button" id="wtdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{{worker_type}}
+					</button>
+					<div class="dropdown-menu custom-dropdown" aria-labelledby="wtdropdownMenuButton">
+						<a class="dropdown-item" (click)="workFilter(work_value_type, 'Werknemers', branch_type)">Werknemers</a>
+						<a class="dropdown-item" (click)="workFilter(work_value_type, 'Zelfstandigen', branch_type)">Zelfstandigen</a>
+						<a class="dropdown-item" (click)="workFilter(work_value_type, 'Totaal', branch_type)">Totaal</a>
 					</div>
-				</li>
-			</ul>
-			<ul class="nav nav-pills flex-column">
-				<li class="nav-item">
-					<h4>Opleiding</h4>
-				</li>
-				<li class="nav-item">
-					<div class="dropdown">
-						<button class="btn btn-custom dropdown-toggle" type="button" id="cetdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-						 aria-expanded="false">
-							{{gender}}
-						</button>
-						<div class="dropdown-menu custom-dropdown" aria-labelledby="cetdropdownMenuButton">
-							<a class="dropdown-item" (click)="educationFilter('Totaal mannen en vrouwen',education_type)">Totaal mannen en vrouwen</a>
-							<a class="dropdown-item" (click)="educationFilter('Mannen',education_type)">Mannen</a>
-							<a class="dropdown-item" (click)="educationFilter('Vrouwen',education_type)">Vrouwen</a>
-						</div>
+				</div>
+			</li>
+
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle" type="button" id="btdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{{branch_type}}
+					</button>
+					<div class="dropdown-menu custom-dropdown" aria-labelledby="btdropdownMenuButton">
+						<a class="dropdown-item" (click)="workFilter(work_value_type, worker_type, 'A-U Alle economische activiteiten')">Economische Activiteiten</a>
+						<a class="dropdown-item" (click)="workFilter(work_value_type, worker_type, 'B-E Nijverheid (geen bouw) en energie')">Nijverheid en energie</a>
 					</div>
-				</li>
-				<li class="nav-item">
-					<div class="dropdown">
-						<button class="btn btn-custom dropdown-toggle" type="button" id="ctdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							{{education_type}}
-						</button>
-						<div class="dropdown-menu custom-dropdown" aria-labelledby="ctdropdownMenuButton">
-							<a class="dropdown-item" *ngFor="let et of education_types" (click)="educationFilter(gender,et.name)">{{et.name}}</a>
-	
-						</div>
+				</div>
+			</li>
+		</ul>
+		<ul class="nav nav-pills flex-column">
+			<li class="nav-item">
+				<h4>Opleiding</h4>
+			</li>
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn btn-custom dropdown-toggle" type="button" id="cetdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+					 aria-expanded="false">
+						{{gender}}
+					</button>
+					<div class="dropdown-menu custom-dropdown" aria-labelledby="cetdropdownMenuButton">
+						<a class="dropdown-item" (click)="educationFilter('Totaal mannen en vrouwen',education_type)">Totaal mannen en vrouwen</a>
+						<a class="dropdown-item" (click)="educationFilter('Mannen',education_type)">Mannen</a>
+						<a class="dropdown-item" (click)="educationFilter('Vrouwen',education_type)">Vrouwen</a>
 					</div>
-				</li>
-			</ul>
-	
-		</nav>
-		<main class="col-sm-9 offset-sm-3 col-md-9 offset-md-1 pt-3 custom-margin" *ngIf="show === true">
-			<div class="chart">
-				<canvas baseChart [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="'line'">
-				</canvas>
-			</div>
-		</main>
-	
-	</div>
-	<!-- Crime-education bla bla bla -->
-	
-	
-	
-	
-	
-	<!-- <button (click)="getCrime('Opgehelderde misdrijven')">Opgehelderde misdrijven</button>
+				</div>
+			</li>
+			<li class="nav-item">
+				<div class="dropdown">
+					<button class="btn btn-custom dropdown-toggle" type="button" id="ctdropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+					 aria-expanded="false">
+						{{education_type}}
+					</button>
+					<div class="dropdown-menu custom-dropdown" aria-labelledby="ctdropdownMenuButton">
+						<a class="dropdown-item" *ngFor="let et of education_types" (click)="educationFilter(gender,et.name)">{{et.name}}</a>
+
+					</div>
+				</div>
+			</li>
+		</ul>
+
+	</nav>
+	<main class="col-sm-9 offset-sm-3 col-md-9 offset-md-1 pt-3 custom-margin" *ngIf="show === true">
+		<div class="chart">
+			<canvas baseChart [datasets]="datasets" [labels]="labels" [options]="options" [chartType]="'line'">
+			</canvas>
+		</div>
+	</main>
+
+</div>
+<!-- Crime-education bla bla bla -->
+
+
+
+
+
+<!-- <button (click)="getCrime('Opgehelderde misdrijven')">Opgehelderde misdrijven</button>
 	<button (click)="getCrime('Registraties van verdachten')">Registraties van verdachten</button>
 	<button (click)="getCrime('Geregistreerde misdrijven')">Geregistreerde misdrijven</button>
 	<br />
 	<button (click)="getWork('Werkzame personen')">Werkzame personen</button>
 	<button (click)="getWork('Banen')">Banen</button> -->
-	<!-- <button (click)="getWork('Gewerkte uren')">Gewerkte uren</button> -->
-	<!-- <br />
+<!-- <button (click)="getWork('Gewerkte uren')">Gewerkte uren</button> -->
+<!-- <br />
 	<button (click)="getEducation('Mannen')">Mannen</button>
 	<button (click)="getEducation('Vrouwen')">Vrouwen</button>
 	<button (click)="getEducation('Totaal mannen en vrouwen')">Totaal mannen en vrouwen</button>
