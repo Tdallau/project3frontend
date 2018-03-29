@@ -70,7 +70,7 @@ export class WorkEducationComponent implements OnInit {
           work_amount : 0
         });
       });
-      this.mainService.getWork().subscribe((work: [any]) => {
+      this.mainService.getWork('Banen', 'Totaal', 'A-U Alle economische activiteiten').subscribe((work: [any]) => {
         console.log(work);
         work.forEach(el => {
           // console.log(element);
